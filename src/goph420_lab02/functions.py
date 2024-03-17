@@ -1,9 +1,9 @@
-#\
+
 import numpy as np
 
 
 
-def root_newton_raphson(x0, f, dfdx): float, int, numpy.ndarray
+def root_newton_raphson(x0, f, dfdx):
     """
     
     Peramters
