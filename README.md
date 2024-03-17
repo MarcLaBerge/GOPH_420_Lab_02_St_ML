@@ -1,2 +1,6 @@
 # GOPH_420_Lab_02_St_ML
-Lab 2 - Root Finding
+# GOPH 420 - Lab 2 - Root Finding
+Geophysicists
+*Semester:* W2024
+*Instructor:* B. Karchewski
+*Author:* <Marc Laberge>
