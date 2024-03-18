@@ -24,3 +24,21 @@ def root_newton_raphson(x0, f, dfdx):
 
     
     """
+    pass
+
+
+def root_secant_modified(x0, dx, f):
+    '''
+    
+    Parameters
+    ----------
+    
+    
+    Raises
+    ------
+    
+    
+    Returns
+    -------
+    '''
+    pass
