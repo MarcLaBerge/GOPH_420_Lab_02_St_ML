@@ -39,12 +39,22 @@ def root_secant_modified(x0, dx, f):
     ----------
     x0:
         Initial guess
-    
+    dx:
+        Step size for derivative estimation
+    f:
+        The entered function
+        
     Raises
     ------
     
     
     Returns
     -------
+    Final estimate of the root:
+        Float
+    Number of iterations it takes to converge:
+        Integer
+    One-dimensional vector of the approximate relative error at each iteration:
+        Numpy.ndarray
     '''
     pass
