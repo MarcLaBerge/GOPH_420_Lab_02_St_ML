@@ -40,7 +40,7 @@ def root_newton_raphson(x0, f, dfdx):
         # Starting approximate relative error
     eps_a = 2 * tol
         #Error array at each iteration
-    rel_error = np.array[]
+    rel_error = np.array([])
     
     # While loop, will stop once error is smaller than tolerance and has completed less than the max iterations
     while eps_a > tol and itr < max_itr:
