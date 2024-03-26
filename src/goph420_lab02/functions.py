@@ -85,4 +85,33 @@ def root_secant_modified(x0, dx, f):
     One-dimensional vector of the approximate relative error at each iteration:
         Numpy.ndarray
     '''
-    pass
+    # Variables needed for the loop
+        # Max iteration
+    max_itr = 100
+        # Starting iteration
+    itr = 1
+        # Approximate relative error tolerance
+    tol = 1e-5
+        # Starting approximate relative error
+    eps_a = 2 * tol
+        # Error array at each iteration
+    rel_error = np.array([])
+        # Zeta max
+
+    # While loop, will stop once error is smaller than tolerance and has completed less than the max iterations
+    while eps_a > tol:  
+        x_change = x0 + dx
+        x1 = x0 - (f(x0) * dx) / (f(x_change) - f(x0))
+        # Updating relative approximate error
+        eps_a = np.abs((x1 - x0) / x1)
+        # Updating the approximate relative error vector
+        rel_error = np.append(rel_error, eps_a)
+        # Update the guess
+        x0 = x1
+        # Update the iteration
+        itr += 1
+        if itr >= max_itr:
+            raise RuntimeError(f"Modified Secant Method couldn't converge fast enough with the initial guess{x0}")
+        
+
+    return
