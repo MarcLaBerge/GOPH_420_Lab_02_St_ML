@@ -21,6 +21,8 @@ def main():
     #Layer thickness
     H = 4000 # [m]
     
+    #Set some frequencies
+    f = np.array([0.01, 0.04, 0.09, 0.16, 0.25, 0.36, 0.49, 0.64, 0.81, 1, 2, 5, 10])
 
     #Equation 1 root finding equation g(C) = 0
         #Lambda can take allows user to take multiple arguments (f, C) in one function
