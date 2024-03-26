@@ -48,8 +48,11 @@ def main():
                 break
             else:
                 C_initial = C_asy - 1e-4
-                roots[i, k], iterations[i,k], residual = root_secant_modified(C_initial, dx, f)
+                roots[i, k], iterations[i,k], error = root_secant_modified(C_initial, dx, f)
                 k += 1
+
+
+    
 if __name__ == "__main__":
     main()
 

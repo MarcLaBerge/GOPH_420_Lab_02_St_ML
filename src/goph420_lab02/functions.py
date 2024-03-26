@@ -113,5 +113,5 @@ def root_secant_modified(x0, dx, f):
         if itr >= max_itr:
             raise RuntimeError(f"Modified Secant Method couldn't converge fast enough with the initial guess{x0}")
         
-
-    return
+    return x0 , itr , rel_error
+    
