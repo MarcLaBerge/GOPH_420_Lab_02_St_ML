@@ -1,9 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+from goph420_lab02.functions import root_newton_raphson
 
 
 def main():
+    """
+    Main driver for lab 2, root finding using Newton-Raphson and secant method
+    """
+
     #Set the known values
 
     #Layer Density
@@ -16,17 +20,16 @@ def main():
 
     #Layer thickness
     H = 4000 # [m]
-
-    #Frequency values *Not sure if these values actually work*
-    f = np.array([-10, -5, -1, 0, 1, 5, 10])
     
 
-    #Equation 1
-    g_c = (rho_2/rho_1)*np.sqrt((H ** 2)*((beta_1 ** -2) - (beta_1 ** -2)) - C ** 2) / C
+    #Equation 1 root finding equation g(C) = 0
+        #Lambda can take allows user to take multiple arguments (f, C) in one function
+    f = lambda f, C: (np.tan(2 * np.pi * f * C) 
+                      - (rho_2/rho_1) * np.sqrt((H ** 2)*((beta_1 ** -2) - (beta_1 ** -2)) - C ** 2) / C)
 
-    #Equation 2 (cL -> Love wave velocity [m/s])
-    cL = beta_1 ** -2 - (C / H) ** 2
+    #Derivative of Equation 1
+    dfdx = lambda f, C: ((2 * np.pi * f) * (1 / np.cos(2 * np.pi * f * C) ** 2))
 
-    #Equation 3 (lam_L -> Love wave wavelength [m])
-    lam_L = cL / f
+if __name__ == "__main__":
+    main()
 
