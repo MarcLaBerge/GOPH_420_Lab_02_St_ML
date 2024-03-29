@@ -20,7 +20,7 @@ def main():
     
     
     #Set some frequencies
-    frequency = np.array([0.01, 0.25, 1, 2, 5, 10])
+    frequency = np.array([0.01, 0.2, 0.50, 0.75, 1, 2, 5, 10])
 
     #Zeta Max
     C_max = np.sqrt(H ** 2 * ((beta_1 ** -2) - (beta_2 ** -2)))
@@ -41,7 +41,7 @@ def main():
           
         return dfdx
     
-    modes = [0, 1, 2]
+    modes = [0, 1, 2, 3]
 
     # Creating empty array to store roots or zeta
     zeta = np.zeros([len(frequency), len(modes)])
@@ -91,7 +91,7 @@ def main():
             plt.plot(roots, function(roots), 'go')
 
             # Storing the values of the modes into the zeta, velocity and wavelength arrays
-            if k < 3:
+            if k < len(modes):
                 zeta[i, k] = roots
                 # Use functions given in the lab to find the values for the other arrays
                     # Equation 2
@@ -124,52 +124,88 @@ def main():
         plt.ylabel("Frequency(Zeta) [Hz]")
         plt.title(f"Frequency of {f} [Hz]")
         plt.savefig(f"figures/frequency_plots/Frequency_{f}.png")
-    # Root finding 
-    """
-    # Plot zeta vs frequency for each mode
+    
+    # Stop editing the last figure
+    plt.close("all")
+    
+
+
+# Plot zeta vs frequency for each mode
     plt.plot(frequency, zeta[:,0], label = 'Mode 0')
-    # Finding where indicies for frequency exists - mode 1
-    #mode1 = np.argwhere(zeta[:,1] > 0).flatten() 
-    #plt.plot(frequency[mode1[0]:], zeta[mode1[0]:,1], label = 'Mode 1')
-    plt.plot(frequency[1:], roots[1:,1], label = 'Mode 1')
-    #plt.plot(frequency, zeta[:,1], label = 'Mode 1')
-    # Finding where indicies for frequency exists - mode 2
-    #mode2 = np.argwhere(zeta[:,2] > 0).flatten() 
-    #lt.plot(frequency[mode2[0]:], zeta[mode2[0]:,2], label = 'Mode 2')
-    #plt.plot(frequency, zeta[:,2], label = 'Mode 2')
-    plt.plot(frequency[2:], roots[2,2], label = 'Mode 2')
+
+    # Finding frequencies for where roots exist - mode 1
+    mode1 = np.argwhere(zeta[:,1] > 0).flatten() 
+    plt.plot(frequency[mode1[0]:], zeta[mode1[0]:,1], label = 'Mode 1')
+
+    # Finding frequencies for where roots exist - mode 2
+    mode2 = np.argwhere(zeta[:,2] > 0).flatten() 
+    plt.plot(frequency[mode2[0]:], zeta[mode2[0]:,2], label = 'Mode 2')
+
+    # Finding frequencies for where roots exist - mode 3
+    mode3 = np.argwhere(zeta[:,3] > 0).flatten() 
+    plt.plot(frequency[mode3[0]:], zeta[mode3[0]:,3], label = 'Mode 3')
+
+    plt.title('Zeta as a Function of Frequency')
     plt.legend()
     plt.xlabel('Frenquency [Hz]')
     plt.ylabel('Zeta (C)')
     plt.savefig('figures/Zeta_vs_Frequency.png')
+    
+    # Stop editing this figure
     plt.close('all')
-    """
+    
 
-            
-    """
-    # Finding the initial guess
-    for i in range(len(frequency)):
-        # Finding the mode
-        k = 0  
-        while k < 3 and C_asy > C_max:  
-            C_asy = (0.25 / frequency[i]) * (2 * k + 1)
-            C_initial = C_asy - 1e-4
-            roots[i, k], iterations[i,k], error = root_secant_modified(C_initial, dx, f)
-            k += 1
+# Plot velocity vs frequency for each mode
+    plt.plot(frequency, velocity[:,0], label = 'Mode 0')
 
-    # Plotting the figures, frequencies vs modes
-    plt.figure(figsize = (10,10))
-        # mode 0
-    plt.figure(frequency, roots[:,0], label = 'Mode 0')
-        # mode 1
-    plt.figure(frequency, roots[1:,1], label = 'Mode 1')
-        # mode 2
-    plt.figure(frequency, roots[2:,2], label = 'mode 2')
-    plt.title('Zeta (C) values for a range of frequencies')
+    # Finding frequencies for where roots exist - mode 1
+    mode1 = np.argwhere(velocity[:,1] > 0).flatten() 
+    plt.plot(frequency[mode1[0]:], velocity[mode1[0]:,1], label = 'Mode 1')
+
+    # Finding frequencies for where roots exist - mode 2
+    mode2 = np.argwhere(velocity[:,2] > 0).flatten() 
+    plt.plot(frequency[mode2[0]:], velocity[mode2[0]:,2], label = 'Mode 2')
+
+    # Finding frequencies for where roots exist - mode 3
+    mode3 = np.argwhere(velocity[:,3] > 0).flatten() 
+    plt.plot(frequency[mode3[0]:], velocity[mode3[0]:,3], label = 'Mode 3')
+
+    plt.title('Love Wave Velocity as a Function of Frequency')
+    plt.legend()
     plt.xlabel('Frequency [Hz]')
-    plt.ylabel('Zeta (C)')
-    plt.savefig('figures/zeta_and_frequency.png')
-    """
+    plt.ylabel('Love wave Velocity [m/s]')
+    plt.savefig('figures/Velocity_vs_Frequency.png')
+
+    # Stop editing this figure
+    plt.close("all")
+
+
+# Plot wavelength vs frequency for each mode
+    # Limit the size of the plot since is soooo big
+    plt.ylim(-1, 5000)
+    plt.plot(frequency, wavelength[:,0], label = 'Mode 0', linewidth = '0.75')
+
+    # Finding frequencies for where roots exist - mode 1
+    mode1 = np.argwhere(wavelength[:,1] > 0).flatten() 
+    plt.plot(frequency[mode1[0]:], wavelength[mode1[0]:,1], label = 'Mode 1', linewidth = '0.75')
+
+    # Finding frequencies for where roots exist - mode 2
+    mode2 = np.argwhere(wavelength[:,2] > 0).flatten() 
+    plt.plot(frequency[mode2[0]:], wavelength[mode2[0]:,2], label = 'Mode 2', linewidth = '0.75')
+
+    # Finding frequencies for where roots exist - mode 3
+    mode3 = np.argwhere(wavelength[:,3] > 0).flatten() 
+    plt.plot(frequency[mode3[0]:], wavelength[mode3[0]:,3], label = 'Mode 3', linewidth = '0.75')
+
+    plt.title('Love Wave Wavelength as a Function of Frequency')
+    plt.legend()
+    plt.xlabel('Frequency [Hz]')
+    plt.ylabel('Love Wave Wavelength [m]')
+    plt.savefig('figures/Wavelength_vs_Frequency.png')
+
+    # Stop editing this figure
+    plt.close("all")
+            
 if __name__ == "__main__":
     main()
 
