@@ -124,7 +124,8 @@ def main():
         plt.ylabel("Frequency(Zeta) [Hz]")
         plt.title(f"Frequency of {f} [Hz]")
         plt.savefig(f"figures/frequency_plots/Frequency_{f}.png")
-    
+        
+        print(f"\nIt took the Newton-Raphson method {itr} iterations to converge with the relative error of each iterations being {error}")
     # Stop editing the last figure
     plt.close("all")
     

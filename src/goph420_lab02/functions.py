@@ -48,6 +48,7 @@ def root_newton_raphson(x0, f, dfdx):
         x1 = x0 - (f(x0) / dfdx(x0))
         # Updating the relative approximate error for each iteration
         eps_a = np.abs((x1 - x0) / x1)
+        
         # Updating the approximate relative error vector
         rel_error = np.append(rel_error, eps_a)
         # Update the guess
