@@ -56,7 +56,7 @@ def main():
         # Create the figure
         plt.figure()
         # Create line on the x = 0 axis
-        plt.plot([0, C_max], [0,0], '--r')
+        plt.plot([0, C_max], [0,0], '-k')
 
         # Mode count starting at 0
         k = 0
@@ -83,7 +83,7 @@ def main():
             # Plotting function to find the root
             plt.plot(z_range, function(z_range), '-g')
             # Plotting asymptotes
-            plt.plot([z_max + 1e-4, z_max + 1e-4], [-50, 50], '--b')
+            plt.plot([z_max + 1e-4, z_max + 1e-4], [-50, 50], '-.c')
             plt.plot(x0, 0.0, 'co')
             # Calculating root using modified secant method
             roots, iterations, error = root_newton_raphson(x0, function, derivative)
@@ -113,10 +113,13 @@ def main():
             plt.plot(roots, function(roots), 'go')
 
         # Plotting the frequency vs zeta for a given frequency
+            # Helps us undertsand what is going on with the different frequencies
         z_max = C_max - 1e-4
         z_range = np.linspace(z0, z_max)
         plt.plot(z_range, function(z_range), '-g')
         plt.ylim((-10,10))
+        plt.grid()
+        plt.legend(['_nolegend_', '_nolegend_','Asymptotes'])
         plt.xlabel('Zeta (C)')
         plt.ylabel("Frequency(Zeta) [Hz]")
         plt.title(f"Frequency of {f} [Hz]")
