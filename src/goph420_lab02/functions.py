@@ -32,11 +32,11 @@ def root_newton_raphson(x0, f, dfdx):
     
     # Variables needed for the loop
         # Max iteration
-    max_itr = 100
+    max_itr = 300
         # Starting iteration
     itr = 1
         # Approximate relative error tolerance
-    tol = 1e-5
+    tol = 1e-7
         # Starting approximate relative error
     eps_a = 2 * tol
         #Error array at each iteration
@@ -45,7 +45,7 @@ def root_newton_raphson(x0, f, dfdx):
     # While loop, will stop once error is smaller than tolerance and has completed less than the max iterations
     while eps_a > tol and itr < max_itr:
         # Implementing the Newton-Raphson formula
-        x1 = x0 - f(x0) / dfdx(x0)
+        x1 = x0 - (f(x0) / dfdx(x0))
         # Updating the relative approximate error for each iteration
         eps_a = np.abs((x1 - x0) / x1)
         # Updating the approximate relative error vector
@@ -97,11 +97,13 @@ def root_secant_modified(x0, dx, f):
         # Error array at each iteration
     rel_error = np.array([])
         # Zeta max
-
+    x0 = 2
+    
     # While loop, will stop once error is smaller than tolerance and has completed less than the max iterations
-    while eps_a > tol:  
+    while eps_a > tol and itr < max_itr:
         x_change = x0 + dx
         x1 = x0 - (f(x0) * dx) / (f(x_change) - f(x0))
+        print("Root is", x1)
         # Updating relative approximate error
         eps_a = np.abs((x1 - x0) / x1)
         # Updating the approximate relative error vector
