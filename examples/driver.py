@@ -181,7 +181,7 @@ def main():
 
 
 # Plot wavelength vs frequency for each mode
-    # Limit the size of the plot since is soooo big
+    # Limit the size of the plot since is soooo big, mode 1 is very big at small frequencies
     plt.ylim(-1, 5000)
     plt.plot(frequency, wavelength[:,0], label = 'Mode 0', linewidth = '0.75')
 
