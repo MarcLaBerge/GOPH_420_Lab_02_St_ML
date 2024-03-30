@@ -20,7 +20,7 @@ def main():
     
     
     #Set some frequencies
-    frequency = np.array([0.01, 0.2, 0.50, 0.75, 1, 2, 5, 10])
+    frequency = np.array([0.01, 0.25, 0.50, 0.75, 1, 2, 5, 10])
 
     #Zeta Max
     C_max = np.sqrt(H ** 2 * ((beta_1 ** -2) - (beta_2 ** -2)))
@@ -105,6 +105,7 @@ def main():
             # z0 has to be big enough to not show the function going back up to inf (1e-4, isn't big enough)
             z0 = z_max + 2e-4
 
+        # If the initial guess is less than 0 and the mode is 0
         if not k and function(x0:= C_max - 1e-4) < 0:
             roots, itr, error = root_newton_raphson(x0, function, derivative)
             zeta[i, k] = roots
@@ -120,7 +121,7 @@ def main():
         plt.ylim((-10,10))
         plt.grid()
         plt.legend(['_nolegend_', '_nolegend_','Asymptotes'])
-        plt.xlabel('Zeta (C)')
+        plt.xlabel('Zeta (C) [s]')
         plt.ylabel("Frequency(Zeta) [Hz]")
         plt.title(f"Frequency of {f} [Hz]")
         plt.savefig(f"figures/frequency_plots/Frequency_{f}.png")
@@ -134,7 +135,7 @@ def main():
 # Plot zeta vs frequency for each mode
     plt.plot(frequency, zeta[:,0], label = 'Mode 0')
 
-    # Finding frequencies for where roots exist - mode 1
+    # Finding frequencies for where roots exist - mode 1, positive values
     mode1 = np.argwhere(zeta[:,1] > 0).flatten() 
     plt.plot(frequency[mode1[0]:], zeta[mode1[0]:,1], label = 'Mode 1')
 
@@ -149,7 +150,7 @@ def main():
     plt.title('Zeta as a Function of Frequency')
     plt.legend()
     plt.xlabel('Frenquency [Hz]')
-    plt.ylabel('Zeta (C)')
+    plt.ylabel('Zeta (C) [s]')
     plt.savefig('figures/Zeta_vs_Frequency.png')
     
     # Stop editing this figure
