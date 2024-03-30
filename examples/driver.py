@@ -105,7 +105,7 @@ def main():
             # z0 has to be big enough to not show the function going back up to inf (1e-4, isn't big enough)
             z0 = z_max + 2e-4
 
-        # If the initial guess is less than 0 and the mode is 0
+        # If the initial guess is less than 0 and the mode other than in array
         if not k and function(x0:= C_max - 1e-4) < 0:
             roots, itr, error = root_newton_raphson(x0, function, derivative)
             zeta[i, k] = roots

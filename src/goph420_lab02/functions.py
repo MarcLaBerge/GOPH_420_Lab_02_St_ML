@@ -108,7 +108,7 @@ def root_secant_modified(x0, dx, f):
         # Updating relative approximate error
         eps_a = np.abs((x1 - x0) / x1)
         # Updating the approximate relative error vector
-        rel_error = np.append(rel_error, eps_a)
+        rel_error = np.append(eps_a)
         # Update the guess
         x0 = x1
         # Update the iteration
